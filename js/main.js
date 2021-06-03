@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-  console.log("hello world");
+  console.log("hello world"); //出力確認
 
   let type = "line"; //棒グラフの場合、"line"
 
@@ -14,7 +14,7 @@
     datasets: [
       {
         label: "@taguchi",
-        data: [120, 300, 200, 210],
+        data: [120, 500, 200, 210],
       },
       {
         label: "@fkoji",
@@ -23,9 +23,36 @@
     ],
   };
 
-  let options;
+  //オプションを渡す場合、オブジェクトで渡す。
+  //渡す箇所は、インスタンス生成時の第二引数のoptions。
+  let options = {
+    //軸に関してはscalesに記述
+    scales: {
+      //y軸はyAxes（y軸）に記載。ticksは「刻む」という意味。
+      yAxes: [
+        {
+          ticks: {
+            // min:0,
+            // max:400,//ただしこの場合、最大値が400を超える場合グラフの描画範囲を超える。下記に変更。
+            //基本的な範囲は0~400だが、超えた場合は適切に範囲を再選択する。
+            suggestedMin: 0,
+            suggestedMax: 400,
+            //軸を100刻みにしたい場合、stepSizeで指定可能。
+            stepSize: 100,
+            //軸の単位をつける場合、callbackをkeyに渡し、値は無名関数。第一引数：値、第二引数：何番目、第三引数：
+            callback: function (value, index, values) {
+              return "JPY" + value;
+            },
+          },
+        },
+      ],
+    },
+  };
 
+  //id="js-my_chart"のcanvasに2dのContextを渡す
   let ctx = document.getElementById("js-my_chart").getContext("2d");
+
+  //インスタンスの生成。第一引数にCOntext、第二引数にデータのオブジェクトを渡す
   let myChart = new Chart(ctx, {
     type: type,
     data: data,
