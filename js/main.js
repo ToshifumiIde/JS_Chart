@@ -38,15 +38,30 @@
             suggestedMin: 0,
             suggestedMax: 400,
             //軸を100刻みにしたい場合、stepSizeで指定可能。
-            stepSize: 100,
+            // stepSize: 100,
             //軸の単位をつける場合、callbackをkeyに渡し、値は無名関数。第一引数：値、第二引数：何番目、第三引数：
-            callback: function (value, index, values) {
-              return "JPY" + value;
-            },
+            // callback: function (value, index, values) {
+            //   return "JPY" + value;
+            // },
           },
         },
       ],
     },
+    //titleを追加したい場合、optionにtitleを追加
+    title: {
+      display: true,//表示するか否か
+      text: "Annual Sales",//title欄に入力するtext
+      fontSize:18,
+      position:"bottom",//デフォルトはtop
+    },
+    animation:{
+      // duration:0,//グラフのアニメーションをキャンセルする場合
+    },
+    //凡例の設定
+    legend:{
+      // position:"right",//位置を右に置きたい場合
+      display:false,//そもそも表示させない場合
+    }
   };
 
   //id="js-my_chart"のcanvasに2dのContextを渡す
