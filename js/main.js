@@ -6,19 +6,29 @@
   let type = "line"; //棒グラフの場合、"line"
 
   //渡すデータはオブジェクト形式で渡す//
-  //横軸はlabelsで定義、格納する値はdatasetsで定義
-  //格納するデータの1セットはオブジェクトで渡す
-  //複数のデータを渡す場合は配列で渡す
   let data = {
+    //横軸はlabelsで定義、格納する値はdatasetsで定義
     labels: [2010, 2011, 2012, 2013],
+    //複数のデータを渡す場合は配列で渡す
     datasets: [
+      //格納するデータの1セットはオブジェクトで渡す
       {
         label: "@taguchi",
         data: [120, 500, 200, 210],
+        borderColor:"red",//線の色は格納するデータで指定
+        borderWidth:2,//線の太さ
+        //backgroundColor:"rgba(255,0,0,0.2)",//背景色を入れるなら
+        fill:false,//背景を無くす場合
+        pointStyle:"rect",//ポインタの形状
       },
       {
         label: "@fkoji",
         data: [180, 250, 320, 180],
+        borderColor:"blue",
+        borderWidth:2,
+        backgroundColor:"rgba(0,0,255,0.4)",
+        lineTension:0,//グラフを曲線ではなく直線にする
+        pointStyle:"triangle",
       },
     ],
   };
@@ -48,20 +58,21 @@
       ],
     },
     //titleを追加したい場合、optionにtitleを追加
-    title: {
-      display: true,//表示するか否か
-      text: "Annual Sales",//title欄に入力するtext
-      fontSize:18,
-      position:"bottom",//デフォルトはtop
-    },
-    animation:{
-      // duration:0,//グラフのアニメーションをキャンセルする場合
-    },
-    //凡例の設定
-    legend:{
-      // position:"right",//位置を右に置きたい場合
-      display:false,//そもそも表示させない場合
-    }
+    // title: {
+    //   display: true,//表示するか否か
+    //   text: "Annual Sales",//title欄に入力するtext
+    //   fontSize:18,
+    //   position:"bottom",//デフォルトはtop
+    // },
+    // animation:{
+    //   // duration:0,//グラフのアニメーションをキャンセルする場合
+    // },
+    // //凡例の設定
+    // legend:{
+    //   // position:"right",//位置を右に置きたい場合
+    //   display:false,//そもそも表示させない場合
+    // }
+
   };
 
   //id="js-my_chart"のcanvasに2dのContextを渡す
