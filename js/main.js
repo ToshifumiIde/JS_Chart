@@ -3,21 +3,20 @@
 (function () {
   console.log("hello world"); //出力確認
 
-  let type = "radar";
+  let type = "pie";
+  type = "doughnut";
 
   //渡すデータはオブジェクト形式で渡す//
   let data = {
-    labels:["PHP" , "HTML" , "CSS" , "JavaScript" , "Python"],
+    labels:["YES","NO","MAYBE"],
     datasets:[
       {
-      label:"@taguchi",
-      data:[40,50,60,70,60],
-      backgroundColor:"rgba(255,0,0,0.3)",
-      },
-      {
-      label:"@fkoji",
-      data:[80,30,40,60,80],
-      backgroundColor:"rgba(0,0,255,0.3)",
+        data:[122,53,33,],
+        backgroundColor:[
+          "red",
+          "green",
+          "blue",
+        ]
       },
   ]
   };
@@ -25,12 +24,7 @@
   //オプションを渡す場合、オブジェクトで渡す。
   //渡す箇所は、インスタンス生成時の第二引数のoptions。
   let options = {
-    scale:{
-      ticks:{
-        beginAtZero:true,
-        suggestedMax:100,
-      },
-    },
+    cutoutPercentage:40,
   };
 
   //id="js-my_chart"のcanvasに2dのContextを渡す
