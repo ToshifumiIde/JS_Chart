@@ -3,9 +3,9 @@
 (function () {
   console.log("hello world"); //出力確認
 
-  // let type = "line"; //折れ線グラフの場合、"line"
   let type = "bar"; //棒グラフの場合、"bar"
-  type = "horizontalBar";
+  // type = "line"; //折れ線グラフの場合、"line"
+  // type = "horizontalBar";//横棒グラフの場合"horizontalBar""
 
   //渡すデータはオブジェクト形式で渡す//
   let data = {
@@ -15,31 +15,16 @@
     datasets: [
       //格納するデータの1セットはオブジェクトで渡す
       {
-        label: "@taguchi",
+        label: "Sales",
         data: [120, 500, 200, 210],
-        // borderColor:"red",//線の色は格納するデータで指定
-        // borderWidth:2,//線の太さ
-        // backgroundColor:"rgba(255,0,0,0.2)",//背景色を入れる場合
-        backgroundColor: "skyblue", //背景色を入れる場合
-        borderWidth: 0, //枠線を消す場合、borderWidthを0に設定
-        // fill:false,//背景を無くす場合
-        // pointStyle:"rect",//ポインタの形状
+        yAxisID:"sales-axes",
       },
       {
-        label: "@fkoji",
-        data: [180, 250, 320, 180],
-        // borderColor:"blue",
-        // borderWidth:2,
-        // backgroundColor:"rgba(0,0,255,0.4)",
-        // lineTension:0,//グラフを曲線ではなく直線にする
-        // pointStyle:"triangle",
-        backgroundColor: [
-          "hsla(90 , 60% ,60%, 0.3)",
-          "hsla(180 , 60% ,60%, 0.3)",
-          "hsla(270 , 60% ,60%, 0.3)",
-          "hsla(360 , 60% ,60%, 0.3)",
-        ], //棒グラフの個々のグラフの色を変更することも可能
-        borderWidth: 0,
+        label: "Subscribers",
+        data: [802, 1324, 1433, 1889],
+        type: "line", //こちらだけ折れ線グラフにしたい場合、typeで指定
+        fill: false, //折れ線グラフの下の塗り潰しの有無
+        yAxisID:"subscribers-axes",
       },
     ],
   };
@@ -49,48 +34,31 @@
   let options = {
     //軸に関してはscalesに記述
     scales: {
-      //x軸はxAxes(x軸)に記載。
-      xAxes: [
-        {
-          stacked: true,
-        },
-      ],
-
       //y軸はyAxes（y軸）に記載。ticksは「刻む」という意味。
       yAxes: [
         {
-          stacked: true,
-          // ticks: {
-          // min:0,
-          // max:400,//ただしこの場合、最大値が400を超える場合グラフの描画範囲を超える。下記に変更。
-          //基本的な範囲は0~400だが、超えた場合は適切に範囲を再選択する。
-          // suggestedMin: 0,
-          // suggestedMax: 400,
-          //軸を100刻みにしたい場合、stepSizeで指定可能。
-          // stepSize: 100,
-          //軸の単位をつける場合、callbackをkeyに渡し、値は無名関数。第一引数：値、第二引数：何番目、第三引数：
-          // callback: function (value, index, values) {
-          //   return "JPY" + value;
-          // },
-          // },
+          ticks: {
+            suggestedMin: 0,
+            suggestedMax: 400,
+          },
+          id:"sales-axes",
+          type:"linear",
+          position:"left",
         },
+        {
+          ticks:{
+            suggestedMin:0,
+            suggestedMax:2000,
+          },
+          id:"subscribers-axes",
+          type:"linear",
+          position:"right",
+          gridLines:{
+            display:false,
+          }
+        }, 
       ],
     },
-    //titleを追加したい場合、optionにtitleを追加
-    // title: {
-    //   display: true,//表示するか否か
-    //   text: "Annual Sales",//title欄に入力するtext
-    //   fontSize:18,
-    //   position:"bottom",//デフォルトはtop
-    // },
-    // animation:{
-    //   // duration:0,//グラフのアニメーションをキャンセルする場合
-    // },
-    // //凡例の設定
-    // legend:{
-    //   // position:"right",//位置を右に置きたい場合
-    //   display:false,//そもそも表示させない場合
-    // }
   };
 
   //id="js-my_chart"のcanvasに2dのContextを渡す
